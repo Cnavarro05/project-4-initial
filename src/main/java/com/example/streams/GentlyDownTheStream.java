@@ -27,49 +27,89 @@ public class GentlyDownTheStream {
                      .sorted()
                      .collect(Collectors.toList());
     }
-
     // TODO - return a list of sorted fruits with all fruits filtered out that start with "A"
     public List<String> sortedFruitsException() {
-        return null;
+        return fruits.stream()
+                .filter(fruit -> !fruit.startsWith("A"))
+                .sorted()
+                .collect(Collectors.toList());
     }
-
     // TODO - return a list with the first 2 elements of a sorted list of fruits
     public List<String> sortedFruitsFirstTwo() {
-        return null;
+        List<String> sortedFruits = new ArrayList<>(fruits);
+        Collections.sort(sortedFruits);
+        return sortedFruits.subList(0, Math.min(sortedFruits.size(), 2));
     }
-
     // TODO - return a comma separated String of sorted fruits
     public String commaSeparatedListOfFruits() {
-        return null;
+        return fruits.stream()
+                .sorted()
+                .collect(Collectors.joining(", "));
     }
-
     // TODO - return a list of veggies that are sorted in reverse (descending) order
     public List<String> reverseSortedVeggies() {
-        return null;
+        List<String> sortedVeggies = new ArrayList<>(veggies);
+        Collections.sort(sortedVeggies, Collections.reverseOrder());
+        return sortedVeggies;
     }
 
     // TODO - return a list of veggies that are sorted in reverse order, and all in upper case
     public List<String> reverseSortedVeggiesInUpperCase() {
-        return null;
+        List<String> sortedVeggiesUpperCase = veggies.stream()
+                .sorted(Collections.reverseOrder())
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+        return sortedVeggiesUpperCase;
     }
 
     // TODO - return a list of the top 10 values in the list of random integers
     public List<Integer> topTen() {
-        return null;
+        Random random = new Random();
+        List<Integer> randomIntegers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            randomIntegers.add(random.nextInt(1000));
+        }
+        Collections.sort(randomIntegers, Collections.reverseOrder());
+        return randomIntegers.subList(0, Math.min(randomIntegers.size(), 10));
     }
 
     // TODO - return a list of the top 10 unique values in the list of random integers
     public List<Integer> topTenUnique() {
-        return null;
+        Random random = new Random();
+        List<Integer> randomIntegers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            randomIntegers.add(random.nextInt(1000));
+        }
+        List<Integer> uniqueNumbers = randomIntegers.stream().distinct().collect(Collectors.toList());
+        Collections.sort(uniqueNumbers, Collections.reverseOrder());
+        return uniqueNumbers.subList(0, Math.min(uniqueNumbers.size(), 10));
     }
 
     // TODO - return a list of the top 10 unique values in the list of random integers that are odd
     public List<Integer> topTenUniqueOdd() {
-        return null;
+        Random random = new Random();
+        List<Integer> randomIntegers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            randomIntegers.add(random.nextInt(1000));
+        }
+        List<Integer> uniqueOddNumbers = randomIntegers.stream()
+                .distinct()
+                .filter(num -> num % 2 != 0)
+                .collect(Collectors.toList());
+        Collections.sort(uniqueOddNumbers, Collections.reverseOrder());
+        return uniqueOddNumbers.subList(0, Math.min(uniqueOddNumbers.size(), 10));
     }
 
     // TODO - return a single value that represents the average of all of your random numbers
     public Double average() {
-        return null;
+        Random random = new Random();
+        List<Integer> randomIntegers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            randomIntegers.add(random.nextInt(1000));
+        }
+        return randomIntegers.stream()
+                .mapToDouble(Integer::doubleValue)
+                .average()
+                .orElse(0.0);
     }
 }
